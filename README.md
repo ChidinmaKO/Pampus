@@ -16,6 +16,11 @@
 ## Overview
 
 ## How to view
+- Clone the repository by running the following command
+`git clone https://github.com/ChidinmaKO/Pampus.git`
+- Run `npm install` to install packages and dependencies.
+- Run `gulp` to start the server.
+- Visit `localhost:3000` on your local machine.
 
 ## Built With
 - HTML
@@ -26,5 +31,8 @@
 - [Icomoon](https://icomoon.io/app)
 
 ## Feedback
+If you have any feedback, please tweet [@ChidinmaKO](https://twitter.com/chidinmako)
+
 ## License
+Licensed under the MIT License. See [LICENSE](https://github.com/ChidinmaKO/Pampus/blob/master/LICENSE) for more information.
 ## To Dos
