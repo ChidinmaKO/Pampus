@@ -1,0 +1,10 @@
+* {
+    box-sizing: border-box;
+    &:focus{
+      outline-color: #555;
+      outline-width: thin;
+    }
+}
+::selection{
+    background: #f0f0f0;
+}
