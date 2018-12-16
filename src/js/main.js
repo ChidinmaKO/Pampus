@@ -1,6 +1,16 @@
 import Handlebars from 'handlebars';
 import axios from 'axios';
 
+export const getDevice = resolution => {
+    let device = 'Mobile';
+    if(resolution >= 1024) {
+        device = 'Desktop'
+    } else if(resolution >= 720) {
+        device = 'Tablet'
+    }
+    return device;
+};
+
 (async function (){
     let html;
     const url = 'https://static.usabilla.com/recruitment/apidemo.json';
@@ -11,15 +21,7 @@ import axios from 'axios';
     const ratingEntries = document.querySelectorAll('[id^="rating"]');
 
     const template = Handlebars.compile(source);
-    const getDevice = resolution => {
-        let device = 'Mobile';
-        if(resolution >= 1024) {
-            device = 'Desktop'
-        } else if(resolution >= 720) {
-            device = 'Tablet'
-        }
-        return device;
-    };
+    
     
     const feedback = await axios.get(url);
 

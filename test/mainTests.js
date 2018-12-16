@@ -8,11 +8,11 @@
 //     module.exports = compiled;
 // }
 
-var main = require('../dist/js/main');
+var main = require('../dist/js/app').getDevice;
 var assert = require('chai').assert;
 
-var expect = require('chai').expect();
-var should = require('chai').should();
+var expect = require('chai').expect;
+var should = require('chai').should;
 
 describe('Basic Mocha String Test', () => {
     it('should return number of charachters in a string', function () {
