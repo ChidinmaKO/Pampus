@@ -3,7 +3,8 @@
     "start": "gulp",
     "build": "gulp build",
     "styles": "gulp styles",
-    "scripts": "gulp scripts"
+    "scripts": "gulp scripts",
+    "test": "mocha || exit 0"
   },
   "dependencies": {
     "axios": "^0.18.0",

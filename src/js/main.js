@@ -1,7 +1,6 @@
 import Handlebars from 'handlebars';
 import axios from 'axios';
 
-
 (async function (){
     let html;
     const url = 'https://static.usabilla.com/recruitment/apidemo.json';
@@ -83,6 +82,7 @@ import axios from 'axios';
             contentLoop.innerHTML = html;
         })
     })
-
-    
+    // module.exports = { template };
 }());
+
+
