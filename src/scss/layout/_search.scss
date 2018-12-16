@@ -1,34 +1,73 @@
 .search {
-    &__label{
-        position: relative;
-        display: block;
-        color: #888888;
-    }
-    &__button{
-        position: absolute;
-        top: 8px;
-        left: 5px;
-        margin: 0;
+    margin-bottom: 15px;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+
+    @media screen and (max-width: 600px) {
+        flex-wrap: wrap;
         padding: 0;
-        appearance: none;
-        background: none;
-        border: 0;
-        outline: none;
-        svg{
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    
+    .search__box {
+        position: relative;
+        margin-right: 20px;
+
+        svg {
             width: 20px;
             height: 20px;
-            fill: currentColor;
+            fill:  #868686;
+            position: absolute;
+            top: 10px;
+            left: 4px;
+        }
+
+        .search__input {
+            border: 1px solid #d6e0ee;
+            width: 240px;
+            padding: 10px 5px 10px 30px;
         }
     }
-    &__input{
-        height: 30px;
-        padding: 2px 5px 2px 30px;
-        font: inherit;
-    }
-}
+    .search__ratings {
 
-.rating{
-    &.selected {
-        background: red;
+        .ratings__button {
+            border: 1px solid #ced3dd;;
+            color: #969ca5;
+            padding: 8px;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: $base-font-size * .8;
+
+            &--selected {
+                background: $background--primary;
+                border-color: $background--primary;
+                color: $background--tertiary;
+            }
+        }
+    }
+
+    .search__counter {
+        font-size: $base-font-size * .8;
+        margin-left: auto;
+    }
+
+
+    @media screen and (max-width: 600px) {
+
+        .search__box{
+            padding: 0;
+            margin: 0;
+            width: 100%;
+
+            .search__input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
     }
 }

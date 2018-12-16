@@ -1,10 +1,31 @@
 * {
     box-sizing: border-box;
     &:focus{
-      outline-color: #555;
+      outline-color: $outline-color;
       outline-width: thin;
     }
 }
 ::selection{
-    background: #f0f0f0;
+    background: $selection--color;
+}
+
+.wrapper{
+    padding: 40px;
+    padding-bottom: 80px;
+    @media screen and (max-width: 600px) {
+        padding: 20px 20px 40px 20px;
+    }
+}
+
+body{
+    font-family: $font--primary;
+    font-size: $base-font-size;
+    background: $background--secondary;
+    color: $color;
+}
+
+header{
+    background: $background--tertiary;
+    padding: 10px 20px;
+    font-size: $base-font-size * 1.4;
 }

@@ -7,58 +7,77 @@
     <meta name="description" content="A sample feedback dashboard">
     <meta name="author" content="Chidinma Kalu">
     <title>User Feedback</title>
+    <link href="../node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
     <link href="dist/css/app.css" rel="stylesheet">
+    
 </head>
 
 <body>
-    <div>
-        <form class="search" id="searchForm">
-            <label class="search__label">
-                <button class="search__button" aria-label="Search icon">
-                    <svg id="icon-search" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <title>search</title>
-                        <path d="M21.7 20.3l-3.7-3.7c1.2-1.5 2-3.5 2-5.6 0-5-4-9-9-9s-9 4-9 9c0 5 4 9 9 9 2.1 0 4.1-0.7 5.6-2l3.7 3.7c0.2 0.2 0.5 0.3 0.7 0.3s0.5-0.1 0.7-0.3c0.4-0.4 0.4-1 0-1.4zM4 11c0-3.9 3.1-7 7-7s7 3.1 7 7c0 1.9-0.8 3.7-2 4.9 0 0 0 0 0 0s0 0 0 0c-1.3 1.3-3 2-4.9 2-4 0.1-7.1-3-7.1-6.9z"></path>
-                    </svg>
-                </button>
-                
-                <input id="searchInput" class="search__input" type="search" aria-label="Filter through the comments" value placeholder="Search here" />
-            </label>
-        </form>
-
-        <div>
-            <button class="rating" id="rating1">1</button>
-            <button class="rating" id="rating2">2</button>
-            <button class="rating" id="rating3">3</button>
-            <button class="rating" id="rating4">4</button>
-            <button class="rating" id="rating5">5</button>
+    <header>
+        <div class="logo">
+            😍 Dashboard
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Rating</th>
-                    <th>Comment</th>
-                    <th>Browser</th>
-                    <th>Device</th>
-                    <th>Platform</th>
-                    <th>Location</th>
-                </tr>
-            </thead>
-            <tbody id="content-loop">
-            </tbody>
-        </table>
+    </header>
+    <div class="wrapper" role="main">
+        <div class="search">
+            <div class="search__box">
+                <form id="searchForm">
+                    <label class="search__label">
+                        <svg id="icon-search" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <title>search</title>
+                            <path d="M21.7 20.3l-3.7-3.7c1.2-1.5 2-3.5 2-5.6 0-5-4-9-9-9s-9 4-9 9c0 5 4 9 9 9 2.1 0 4.1-0.7 5.6-2l3.7 3.7c0.2 0.2 0.5 0.3 0.7 0.3s0.5-0.1 0.7-0.3c0.4-0.4 0.4-1 0-1.4zM4 11c0-3.9 3.1-7 7-7s7 3.1 7 7c0 1.9-0.8 3.7-2 4.9 0 0 0 0 0 0s0 0 0 0c-1.3 1.3-3 2-4.9 2-4 0.1-7.1-3-7.1-6.9z"></path>
+                        </svg>
+                        <input id="searchInput" class="search__input" type="search" aria-label="Filter through the comments" value placeholder="Search here" />
+                    </label>
+                </form>
+            </div>
+
+            <div class="search__ratings">
+                <div>
+                    <button class="ratings__button" id="rating1">1</button>
+                    <button class="ratings__button" id="rating2">2</button>
+                    <button class="ratings__button" id="rating3">3</button>
+                    <button class="ratings__button" id="rating4">4</button>
+                    <button class="ratings__button" id="rating5">5</button>
+                </div>
+
+            </div>
+
+            <div class="search__counter">
+                Showing <span class="length" aria-live="polite">0</span> items
+            </div>
+        </div>
+        
+        <div class="feedback">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rating</th>
+                        <th class="fh__comment">Comment</th>
+                        <th class="fh__browser">Browser</th>
+                        <th>Device</th>
+                        <th>Platform</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody id="feedback-loop">
+                </tbody>
+            </table>
+
+            <template id="row-template">
+                {{#each items}}
+                    <tr class="feedback__item">
+                        <td><span class="fi__rating">{{rating}}</span></td>
+                        <td>{{comment}}</td>
+                        <td>{{computed_browser.Browser}} <span class="fi__browser__version">{{computed_browser.Version}}</span></td>
+                        <td>{{device}}</td>
+                        <td>{{computed_browser.Platform}}</td>
+                        <td class="fi__user__location"><span class="flag-icon flag-icon-{{toLowerCase geo.country}}"></span>{{computed_location}}</td>
+                    </tr>
+                {{/each}}
+            </template>
+        </div>
     </div>
-    <template id="row-template">
-        {{#each items}}
-            <tr>
-                <td>{{rating}}</td>
-                <td>{{comment}}</td>
-                <td>{{computed_browser.Browser}} {{computed_browser.Version}}</td>
-                <td>{{device}}</td>
-                <td>{{computed_browser.Platform}}</td>
-                <td>{{geo.city}} {{computed_location}}</td>
-            </tr>
-        {{/each}}
-    </template>
     <script src="dist/js/app.js"></script>
 </body>
 </html>

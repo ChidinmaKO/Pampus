@@ -11,14 +11,20 @@ export const getDevice = resolution => {
     return device;
 };
 
+Handlebars.registerHelper('toLowerCase', function(str) {
+    return str.toLowerCase();
+});
+
 (async function (){
     let html;
     const url = 'https://static.usabilla.com/recruitment/apidemo.json';
     const source = document.getElementById('row-template').innerHTML;
-    const contentLoop = document.getElementById('content-loop');
+    const contentLoop = document.getElementById('feedback-loop');
     const searchForm = document.getElementById('searchForm');
     const searchInput = document.getElementById('searchInput');
     const ratingEntries = document.querySelectorAll('[id^="rating"]');
+    const lengthContainer = document.querySelector('.length');
+    let length = 0;
 
     const template = Handlebars.compile(source);
     
@@ -50,6 +56,8 @@ export const getDevice = resolution => {
         };
         html = template(context);
         contentLoop.innerHTML = html;
+        
+        lengthContainer.innerHTML = filteredItems.length;
     }
 
     searchForm.addEventListener('submit', searchFn);
@@ -60,31 +68,40 @@ export const getDevice = resolution => {
             let context;
             const element = event.target;
             
-            element.classList.toggle('selected');
-            const selectedElements = document.querySelectorAll('.selected');
+            element.classList.toggle('ratings__button--selected');
+            const selectedElements = document.querySelectorAll('.ratings__button--selected');
 
             const picked = Array.from(selectedElements).filter(element => {
-                return element.classList.contains('selected');
+                // console.log(selectedElements);
+                return element.classList.contains('ratings__button--selected');
             }).map(element => element.textContent);
 
-            if(element.classList.contains('selected')) {
+            if(element.classList.contains('ratings__button--selected')) {
                 const filteredItems = myItems.filter(item => {
+                    // console.log(selectedElements.length);
                     return picked.includes(item.rating.toString());
                 })
                 context = {
                     items: filteredItems
                 };
+                console.log(filteredItems.length);
+                lengthContainer.innerHTML = filteredItems.length;
             } else {
                 context = {
                     items: myItems
                 }
+                console.log(items.length);
+                lengthContainer.innerHTML = items.length;
             }
             
             html = template(context);
             contentLoop.innerHTML = html;
+            
+            
         })
     })
+
+    console.log(items.length);
+    lengthContainer.innerHTML = items.length;
     // module.exports = { template };
 }());
-
-

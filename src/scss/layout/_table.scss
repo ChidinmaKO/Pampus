@@ -1,0 +1,118 @@
+.feedback {
+    table {
+        background: $background--tertiary;
+        box-shadow: 1px 2px 3px 1px rgba(0,0,0,.1);
+        border-collapse: collapse;
+        margin: 0;
+        padding: 0;
+        table-layout: fixed;
+        width: 100%;
+        text-align: left;
+        
+        thead {
+            th {
+                padding: 15px 15px; 
+                font-weight: 600;
+                text-transform: uppercase;
+
+                &.fh__comment{
+                    width: 40%;
+                }
+
+                &:first-child{
+                    width: 100px;
+                }
+            }
+        }
+
+        tbody {
+            td {
+                padding: 10px 10px 5px 15px;
+                vertical-align: top;
+            }
+            tr {
+                td:first-child{
+                    max-width: 50px;
+                    
+                }
+
+                &:last-child{
+                    border-bottom-color: transparent;
+                }
+            }  
+        }  
+    }
+
+    @media screen and (max-width: 600px) {
+        table {
+            thead {
+                border: none;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                width: 1px;
+            }
+        }
+        
+        table tr {
+            border-bottom: 1px solid #d6e0ee;
+            display: block;
+        }
+        
+        table td {
+            display: block;
+            
+        }
+    }
+}
+
+.feedback__item {
+    border: 1px solid rgba(0, 0, 0, .06);
+    padding: 5px 0;
+    transition: all 400ms cubic-bezier(0.39, 0.575, 0.565, 1);
+
+    @media screen and (max-width: 600px) {
+        border: none;
+    }
+
+    &:hover {
+        background: rgba(0, 0, 0, .04);
+    }
+
+    .fi__rating {
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        background: $background--primary;
+        font-size: $base-font-size * .8;
+        color: $background--tertiary;
+        border-radius: 50%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .fi__browser__version {
+        display: block;
+        font-size: 14px;
+        color: $color--secondary;
+        padding: 5px 0;
+    }
+
+    .fi__user__location {
+        
+        span {
+            display: block;
+            padding-bottom: 5px;
+
+            @media screen and (max-width: 600px) {
+                display: inline-block;
+                margin-right: 5px;
+                padding-bottom: 0px;
+            }
+        }
+    }
+}
