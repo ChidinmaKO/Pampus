@@ -1,33 +1,44 @@
-import Handlebars from 'handlebars';
-import axios from 'axios';
+// import Handlebars from 'handlebars';
+// import axios from 'axios';
+const Handlebars = require('handlebars');
+const axios = require('axios');
 
-export const getDevice = resolution => {
-    let device = 'Mobile';
-    if(resolution >= 1024) {
-        device = 'Desktop'
-    } else if(resolution >= 720) {
-        device = 'Tablet'
-    }
-    return device;
-};
+// export const getDevice = resolution => {
+//     let device = 'Mobile';
+//     if(resolution >= 1024) {
+//         device = 'Desktop'
+//     } else if(resolution >= 720) {
+//         device = 'Tablet'
+//     }
+//     return device;
+// };
 
 Handlebars.registerHelper('toLowerCase', function(str) {
     return str.toLowerCase();
 });
 
-(async function (){
+module.exports = (async function (){
     let html;
     const url = 'https://static.usabilla.com/recruitment/apidemo.json';
     const source = document.getElementById('row-template').innerHTML;
     const contentLoop = document.getElementById('feedback-loop');
     const searchForm = document.getElementById('searchForm');
     const searchInput = document.getElementById('searchInput');
-    const ratingEntries = document.querySelectorAll('[id^="rating"]');
+    const ratingEntries = document.querySelectorAll('.ratings__button');
     const lengthContainer = document.querySelector('.length');
-    let length = 0;
+    // let length = 0;
 
     const template = Handlebars.compile(source);
     
+    const getDevice = resolution => {
+        let device = 'Mobile';
+        if(resolution >= 1024) {
+            device = 'Desktop'
+        } else if(resolution >= 720) {
+            device = 'Tablet'
+        }
+        return device;
+    };
     
     const feedback = await axios.get(url);
 
@@ -65,36 +76,47 @@ Handlebars.registerHelper('toLowerCase', function(str) {
 
     ratingEntries.forEach(entry => {
         entry.addEventListener('click', event => {
-            let context;
-            const element = event.target;
+            let ratingsContext;
+            const ratingElement = event.target;
             
-            element.classList.toggle('ratings__button--selected');
-            const selectedElements = document.querySelectorAll('.ratings__button--selected');
+            ratingElement.classList.toggle('ratings__button--selected');
+            const selectedRatingButtonList = document.querySelectorAll('.ratings__button--selected');
 
-            const picked = Array.from(selectedElements).filter(element => {
-                // console.log(selectedElements);
-                return element.classList.contains('ratings__button--selected');
-            }).map(element => element.textContent);
+            const pickedRatings = Array.from(selectedRatingButtonList).map(element => parseInt(element.getAttribute('data-rating')));
 
-            if(element.classList.contains('ratings__button--selected')) {
-                const filteredItems = myItems.filter(item => {
-                    // console.log(selectedElements.length);
-                    return picked.includes(item.rating.toString());
+            let filteredItems = [];
+
+            if(pickedRatings.length > 0) {
+                filteredItems = myItems.filter(item => {
+                    return pickedRatings.includes(item.rating);
                 })
-                context = {
-                    items: filteredItems
-                };
-                console.log(filteredItems.length);
-                lengthContainer.innerHTML = filteredItems.length;
             } else {
-                context = {
-                    items: myItems
-                }
-                console.log(items.length);
-                lengthContainer.innerHTML = items.length;
+                filteredItems = myItems;
             }
+            ratingsContext = {
+                items: filteredItems
+            };
+            console.log(filteredItems.length);
+            lengthContainer.innerHTML = filteredItems.length;
+
+            // if(element.classList.contains('ratings__button--selected')) {
+            //     const filteredItems = myItems.filter(item => {
+            //         return picked.includes(item.rating.toString());
+            //     })
+            //     context = {
+            //         items: filteredItems
+            //     };
+            //     console.log(filteredItems.length);
+            //     lengthContainer.innerHTML = filteredItems.length;
+            // } else {
+            //     context = {
+            //         items: myItems
+            //     }
+            //     console.log(items.length);
+            //     lengthContainer.innerHTML = items.length;
+            // }
             
-            html = template(context);
+            html = template(ratingsContext);
             contentLoop.innerHTML = html;
             
             
