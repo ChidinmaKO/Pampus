@@ -29,7 +29,7 @@ This app is a sample user feedback dashboard. The dashboard contains a list of r
 ## Built With
 - HTML
 - CSS
-- Javascript
+- Javascript [ES6]
 - [Axios](https://github.com/axios/axios)
 - [Handlebars](https://handlebarsjs.com/)
 - [Icomoon](https://icomoon.io/app)
@@ -41,3 +41,7 @@ If you have any feedback, please tweet [@ChidinmaKO](https://twitter.com/chidinm
 
 ## License
 Licensed under the MIT License. See [LICENSE](https://github.com/ChidinmaKO/Pampus/blob/master/LICENSE) for more information.
+
+## To Dos
+* *Integration Test with Mocha & chai*
+* *Make App Progressive*

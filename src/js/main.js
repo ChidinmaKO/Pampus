@@ -1,17 +1,5 @@
-// import Handlebars from 'handlebars';
-// import axios from 'axios';
 const Handlebars = require('handlebars');
 const axios = require('axios');
-
-// export const getDevice = resolution => {
-//     let device = 'Mobile';
-//     if(resolution >= 1024) {
-//         device = 'Desktop'
-//     } else if(resolution >= 720) {
-//         device = 'Tablet'
-//     }
-//     return device;
-// };
 
 Handlebars.registerHelper('toLowerCase', function(str) {
     return str.toLowerCase();
@@ -26,8 +14,7 @@ module.exports = (async function (){
     const searchInput = document.getElementById('searchInput');
     const ratingEntries = document.querySelectorAll('.ratings__button');
     const lengthContainer = document.querySelector('.length');
-    // let length = 0;
-
+    
     const template = Handlebars.compile(source);
     
     const getDevice = resolution => {
@@ -96,25 +83,7 @@ module.exports = (async function (){
             ratingsContext = {
                 items: filteredItems
             };
-            console.log(filteredItems.length);
             lengthContainer.innerHTML = filteredItems.length;
-
-            // if(element.classList.contains('ratings__button--selected')) {
-            //     const filteredItems = myItems.filter(item => {
-            //         return picked.includes(item.rating.toString());
-            //     })
-            //     context = {
-            //         items: filteredItems
-            //     };
-            //     console.log(filteredItems.length);
-            //     lengthContainer.innerHTML = filteredItems.length;
-            // } else {
-            //     context = {
-            //         items: myItems
-            //     }
-            //     console.log(items.length);
-            //     lengthContainer.innerHTML = items.length;
-            // }
             
             html = template(ratingsContext);
             contentLoop.innerHTML = html;
@@ -123,7 +92,6 @@ module.exports = (async function (){
         })
     })
 
-    console.log(items.length);
     lengthContainer.innerHTML = items.length;
-    // module.exports = { template };
+
 }());
